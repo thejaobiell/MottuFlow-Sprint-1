@@ -12,9 +12,9 @@ Este sistema visa facilitar o gerenciamento das atividades realizadas no pátio 
 
 ## 👥 Equipe de Desenvolvimento
 
-- **João Gabriel Boaventura Marques e Silva** - RM554874
-- **Léo Mota Lima** - RM557851
-- **Lucas Leal das Chagas** - RM551124
+- **João Gabriel Boaventura Marques e Silva** - RM554874 - 2TDSB2025
+- **Léo Mota Lima** - RM557851 - 2TDSB2025
+- **Lucas Leal das Chagas** - RM551124 - 2TDSB2025
 
 ## 🚀 Tecnologias Utilizadas
 - React Native
