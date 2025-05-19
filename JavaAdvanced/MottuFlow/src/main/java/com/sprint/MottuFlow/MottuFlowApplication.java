@@ -9,5 +9,4 @@ public class MottuFlowApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MottuFlowApplication.class, args);
 	}
-
 }
