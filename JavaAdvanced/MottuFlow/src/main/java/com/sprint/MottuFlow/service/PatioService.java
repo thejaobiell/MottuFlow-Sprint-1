@@ -12,38 +12,42 @@ import java.util.List;
 public class PatioService {
 
     @Autowired
-    private PatioRepository patioRepository;
+    private PatioRepository pR;
 
     public List<Patio> findAll() {
-        return patioRepository.findAll();
+        return pR.findAll();
     }
 
-    public Patio findById(Long id) {
-        return patioRepository.findById(id)
+    public Patio findByIdPatio(Long id) {
+        return pR.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + id));
     }
-
-    public Patio save(Patio patio) {
-        return patioRepository.save(patio);
+    
+    public List<Patio> findByEnderecoPatio(String endereco) {
+        return pR.findByEndereco(endereco);
     }
 
-    public Patio update(Long id, Patio patioDetails) {
-        Patio patio = findById(id);
+    public Patio savePatio(Patio patio) {
+        return pR.save(patio);
+    }
+
+    public Patio updatePatio(Long id, Patio patioDetails) {
+        Patio patio = findByIdPatio(id);
 
         patio.setNome(patioDetails.getNome());
         patio.setEndereco(patioDetails.getEndereco());
         patio.setCapacidadeMaxima(patioDetails.getCapacidadeMaxima());
         
-        return patioRepository.save(patio);
+        return pR.save(patio);
     }
 
-    public void deletePatio(Long id) {
-        Patio patio = patioRepository.findById(id).orElseThrow();
+    public void deletePatioPatio(Long id) {
+        Patio patio = pR.findById(id).orElseThrow();
         patio.getMotos().size();
         patio.getCameras().size();
         patio.getLocalidades().size();
 
-        patioRepository.delete(patio);
+        pR.delete(patio);
     }
 
 }

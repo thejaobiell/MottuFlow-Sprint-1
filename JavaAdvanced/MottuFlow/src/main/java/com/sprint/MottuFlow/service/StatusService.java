@@ -16,57 +16,61 @@ import java.util.List;
 public class StatusService {
 
     @Autowired
-    private StatusRepository statusRepository;
+    private StatusRepository sR;
 
     @Autowired
-    private MotoRepository motoRepository;
+    private MotoRepository mR;
 
     @Autowired
-    private FuncionarioRepository funcionarioRepository;
+    private FuncionarioRepository fR;
 
-    public List<Status> findAll() {
-        return statusRepository.findAll();
+    public List<Status> findAllStatus() {
+        return sR.findAll();
     }
 
-    public Status findById(Long id) {
-        return statusRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Status não encontrado com id: " + id));
+    public Status findByIdStatus(Long id) {
+        return sR.findById(id).orElseThrow(() -> new ResourceNotFoundException("Status não encontrado com id: " + id));
+    }
+    
+    public List<Status> findByTipoStatus(String tipoStatus) {
+        return sR.findByTipoStatus(tipoStatus);
     }
 
-    public Status save(Status status) {
-        Moto moto = motoRepository.findById(status.getMoto().getIdMoto())
-                .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + status.getMoto().getIdMoto()));
+    public List<Status> findByDescricaoStatus(String descricao) {
+        return sR.findByDescricao(descricao);
+    }
 
-        Funcionario funcionario = funcionarioRepository.findById(status.getFuncionario().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado com id: " + status.getFuncionario().getId()));
+
+    public Status saveStatus(Status status) {
+        Moto moto = mR.findById(status.getMoto().getIdMoto()).orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + status.getMoto().getIdMoto()));
+
+        Funcionario funcionario = fR.findById(status.getFuncionario().getId()).orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado com id: " + status.getFuncionario().getId()));
 
         status.setMoto(moto);
         status.setFuncionario(funcionario);
 
-        return statusRepository.save(status);
+        return sR.save(status);
     }
 
-    public Status update(Long id, Status statusDetails) {
-        Status status = findById(id);
+    public Status updateStatus(Long id, Status statusAtualizado) {
+        Status status = findByIdStatus(id);
 
-        status.setTipoStatus(statusDetails.getTipoStatus());
-        status.setDescricao(statusDetails.getDescricao());
-        status.setDataStatus(statusDetails.getDataStatus());
+        status.setTipoStatus(statusAtualizado.getTipoStatus());
+        status.setDescricao(statusAtualizado.getDescricao());
+        status.setDataStatus(statusAtualizado.getDataStatus());
 
-        Moto moto = motoRepository.findById(statusDetails.getMoto().getIdMoto())
-                .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + statusDetails.getMoto().getIdMoto()));
+        Moto moto = mR.findById(statusAtualizado.getMoto().getIdMoto()).orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + statusAtualizado.getMoto().getIdMoto()));
 
-        Funcionario funcionario = funcionarioRepository.findById(statusDetails.getFuncionario().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado com id: " + statusDetails.getFuncionario().getId()));
+        Funcionario funcionario = fR.findById(statusAtualizado.getFuncionario().getId()).orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado com id: " + statusAtualizado.getFuncionario().getId()));
 
         status.setMoto(moto);
         status.setFuncionario(funcionario);
 
-        return statusRepository.save(status);
+        return sR.save(status);
     }
 
-    public void deleteById(Long id) {
-        Status status = findById(id);
-        statusRepository.delete(status);
+    public void deleteByIdStatus(Long id) {
+        Status status = findByIdStatus(id);
+        sR.delete(status);
     }
 }

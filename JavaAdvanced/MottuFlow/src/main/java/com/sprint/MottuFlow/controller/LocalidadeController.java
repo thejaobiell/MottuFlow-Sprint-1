@@ -4,9 +4,11 @@ import com.sprint.MottuFlow.dto.LocalidadeDTO;
 import com.sprint.MottuFlow.model.Localidade;
 import com.sprint.MottuFlow.service.LocalidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,11 +61,27 @@ public class LocalidadeController {
         return localidades.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<LocalidadeDTO> getById(@PathVariable Long id) {
         Localidade localidade = localidadeService.findById(id);
         return ResponseEntity.ok(convertToDTO(localidade));
     }
+    
+    @GetMapping("/ponto-referencia/{ponto}")
+    public List<LocalidadeDTO> getByPontoReferencia(@PathVariable String ponto) {
+        List<Localidade> localidades = localidadeService.findByPontoReferencia(ponto);
+        return localidades.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @GetMapping("/periodo")
+    public List<LocalidadeDTO> getByDataHoraRange(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicio,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFim) {
+
+        List<Localidade> localidades = localidadeService.findByDataHoraBetween(dataInicio, dataFim);
+        return localidades.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
 
     @PostMapping
     public ResponseEntity<LocalidadeDTO> create(@RequestBody LocalidadeDTO localidadeDTO) {

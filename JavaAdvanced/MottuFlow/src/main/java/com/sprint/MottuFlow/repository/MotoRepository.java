@@ -13,5 +13,5 @@ public interface MotoRepository extends JpaRepository<Moto, Long> {
     List<Moto> findByFabricante(@Param("fabricante") String fabricante);
     
     @Query(value = "SELECT * FROM moto WHERE id_patio = :idPatio", nativeQuery = true)
-    List<Moto> findByPatioIdNative(@Param("idPatio") long idPatio);
+    List<Moto> findByPatioId(@Param("idPatio") long idPatio);
 }

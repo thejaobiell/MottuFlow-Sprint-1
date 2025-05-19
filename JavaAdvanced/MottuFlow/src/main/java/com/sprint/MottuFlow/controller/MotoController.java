@@ -36,8 +36,6 @@ public class MotoController {
         moto.setModelo(dto.getModelo());
         moto.setFabricante(dto.getFabricante());
         moto.setAno(dto.getAno());
-
-        // Para setar o Patio, só setar o objeto com id, o serviço cuidará do findById
         if (dto.getIdPatio() != 0) {
             var patio = new com.sprint.MottuFlow.model.Patio();
             patio.setIdPatio(dto.getIdPatio());
@@ -50,33 +48,48 @@ public class MotoController {
 
     @GetMapping
     public List<MotoDTO> getAll() {
-        List<Moto> motos = motoService.findAll();
+        List<Moto> motos = motoService.findAllMoto();
         return motos.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<MotoDTO> getById(@PathVariable Long id) {
-        Moto moto = motoService.findById(id);
+        Moto moto = motoService.findByIdMoto(id);
         return ResponseEntity.ok(convertToDTO(moto));
     }
+    
+    @GetMapping("/fabricante")
+    public ResponseEntity<List<MotoDTO>> getByFabricante(@RequestParam String fabricante) {
+        List<Moto> motos = motoService.findByFabricanteMoto(fabricante);
+        List<MotoDTO> dtos = motos.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
+    }
+
+    @GetMapping("/patio/{idPatio}")
+    public ResponseEntity<List<MotoDTO>> getByPatio(@PathVariable long idPatio) {
+        List<Moto> motos = motoService.findByPatioIdMoto(idPatio);
+        List<MotoDTO> dtos = motos.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
+    }
+
 
     @PostMapping
     public ResponseEntity<MotoDTO> create(@RequestBody MotoDTO motoDTO) {
         Moto moto = convertToEntity(motoDTO);
-        Moto saved = motoService.save(moto);
+        Moto saved = motoService.saveMoto(moto);
         return ResponseEntity.ok(convertToDTO(saved));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MotoDTO> update(@PathVariable Long id, @RequestBody MotoDTO motoDTO) {
         Moto motoDetails = convertToEntity(motoDTO);
-        Moto updated = motoService.update(id, motoDetails);
+        Moto updated = motoService.updateMoto(id, motoDetails);
         return ResponseEntity.ok(convertToDTO(updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        motoService.deleteById(id);
+        motoService.deleteByIdMoto(id);
         return ResponseEntity.noContent().build();
     }
 }

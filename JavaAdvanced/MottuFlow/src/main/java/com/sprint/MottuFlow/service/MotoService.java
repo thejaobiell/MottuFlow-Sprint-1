@@ -14,46 +14,50 @@ import java.util.List;
 public class MotoService {
 
     @Autowired
-    private MotoRepository motoRepository;
+    private MotoRepository mR;
 
     @Autowired
-    private PatioRepository patioRepository;
+    private PatioRepository pR;
 
-    public List<Moto> findAll() {
-        return motoRepository.findAll();
+    public List<Moto> findAllMoto() {
+        return mR.findAll();
     }
 
-    public Moto findById(Long id) {
-        return motoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + id));
+    public Moto findByIdMoto(Long id) {
+        return mR.findById(id).orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + id));
+    }
+    
+    public List<Moto> findByFabricanteMoto(String fabricante) {
+        return mR.findByFabricante(fabricante);
     }
 
-    public Moto save(Moto moto) {
-        Patio patio = patioRepository.findById(moto.getPatio().getIdPatio())
-                .orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + moto.getPatio().getIdPatio()));
+    public List<Moto> findByPatioIdMoto(long idPatio) {
+        return mR.findByPatioId(idPatio);
+    }
+
+
+    public Moto saveMoto(Moto moto) {
+        Patio patio = pR.findById(moto.getPatio().getIdPatio()).orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + moto.getPatio().getIdPatio()));
         moto.setPatio(patio);
 
-        return motoRepository.save(moto);
+        return mR.save(moto);
     }
 
-    public Moto update(Long id, Moto motoDetails) {
-        Moto moto = findById(id);
-
-        moto.setPlaca(motoDetails.getPlaca());
-        moto.setModelo(motoDetails.getModelo());
-        moto.setFabricante(motoDetails.getFabricante());
-        moto.setAno(motoDetails.getAno());
-        moto.setLocalizacaoAtual(motoDetails.getLocalizacaoAtual());
-
-        Patio patio = patioRepository.findById(motoDetails.getPatio().getIdPatio())
-                .orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + motoDetails.getPatio().getIdPatio()));
+    public Moto updateMoto(Long id, Moto motoAtualizada) {
+        Moto moto = findByIdMoto(id);
+        moto.setPlaca(motoAtualizada.getPlaca());
+        moto.setModelo(motoAtualizada.getModelo());
+        moto.setFabricante(motoAtualizada.getFabricante());
+        moto.setAno(motoAtualizada.getAno());
+        moto.setLocalizacaoAtual(motoAtualizada.getLocalizacaoAtual());
+        Patio patio = pR.findById(motoAtualizada.getPatio().getIdPatio()).orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + motoAtualizada.getPatio().getIdPatio()));
         moto.setPatio(patio);
 
-        return motoRepository.save(moto);
+        return mR.save(moto);
     }
 
-    public void deleteById(Long id) {
-        Moto moto = findById(id);
-        motoRepository.delete(moto);
+    public void deleteByIdMoto(Long id) {
+        Moto moto = findByIdMoto(id);
+        mR.delete(moto);
     }
 }

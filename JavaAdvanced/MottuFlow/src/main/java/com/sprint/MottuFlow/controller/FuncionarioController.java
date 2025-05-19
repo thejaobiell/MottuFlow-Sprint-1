@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class FuncionarioController {
 
     @Autowired
-    private FuncionarioService funcionarioService;
+    private FuncionarioService fS;
 
     private FuncionarioDTO convertToDTO(Funcionario funcionario) {
         return new FuncionarioDTO(
@@ -43,33 +43,43 @@ public class FuncionarioController {
 
     @GetMapping
     public List<FuncionarioDTO> getAll() {
-        List<Funcionario> funcionarios = funcionarioService.findAll();
+        List<Funcionario> funcionarios = fS.findAllFuncionario();
         return funcionarios.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<FuncionarioDTO> getById(@PathVariable Long id) {
-        Funcionario funcionario = funcionarioService.findById(id);
+        Funcionario funcionario = fS.findByIdFuncionario(id);
+        return ResponseEntity.ok(convertToDTO(funcionario));
+    }
+    
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<FuncionarioDTO> getByCpf(@PathVariable String cpf) {
+        Funcionario funcionario = fS.findCpfFuncionario(cpf);
+        if (funcionario == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(convertToDTO(funcionario));
     }
 
+    
     @PostMapping
     public ResponseEntity<FuncionarioDTO> create(@RequestBody FuncionarioDTO funcionarioDTO) {
         Funcionario funcionario = convertToEntity(funcionarioDTO);
-        Funcionario saved = funcionarioService.save(funcionario);
+        Funcionario saved = fS.saveFuncionario(funcionario);
         return ResponseEntity.ok(convertToDTO(saved));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<FuncionarioDTO> update(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
         Funcionario funcionarioDetails = convertToEntity(funcionarioDTO);
-        Funcionario updated = funcionarioService.update(id, funcionarioDetails);
+        Funcionario updated = fS.updateFuncionario(id, funcionarioDetails);
         return ResponseEntity.ok(convertToDTO(updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        funcionarioService.deleteById(id);
+        fS.deleteByIdFuncionario(id);
         return ResponseEntity.noContent().build();
     }
 }

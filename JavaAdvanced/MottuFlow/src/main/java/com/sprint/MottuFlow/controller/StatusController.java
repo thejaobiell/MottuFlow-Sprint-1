@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class StatusController {
 
     @Autowired
-    private StatusService statusService;
+    private StatusService sS;
 
     private StatusDTO convertToDTO(Status status) {
         return new StatusDTO(
@@ -50,33 +50,46 @@ public class StatusController {
 
     @GetMapping
     public List<StatusDTO> getAll() {
-        List<Status> statuses = statusService.findAll();
+        List<Status> statuses = sS.findAllStatus();
         return statuses.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<StatusDTO> getById(@PathVariable Long id) {
-        Status status = statusService.findById(id);
+        Status status = sS.findByIdStatus(id);
         return ResponseEntity.ok(convertToDTO(status));
     }
+    
+    @GetMapping("/tipo")
+    public List<StatusDTO> getByTipoStatus(@RequestParam String tipoStatus) {
+        List<Status> statuses = sS.findByTipoStatus(tipoStatus);
+        return statuses.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @GetMapping("/descricao")
+    public List<StatusDTO> getByDescricao(@RequestParam String descricao) {
+        List<Status> statuses = sS.findByDescricaoStatus(descricao);
+        return statuses.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
 
     @PostMapping
     public ResponseEntity<StatusDTO> create(@RequestBody StatusDTO statusDTO) {
         Status status = convertToEntity(statusDTO);
-        Status saved = statusService.save(status);
+        Status saved = sS.saveStatus(status);
         return ResponseEntity.ok(convertToDTO(saved));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<StatusDTO> update(@PathVariable Long id, @RequestBody StatusDTO statusDTO) {
-        Status statusDetails = convertToEntity(statusDTO);
-        Status updated = statusService.update(id, statusDetails);
+        Status statusAtualizado = convertToEntity(statusDTO);
+        Status updated = sS.updateStatus(id, statusAtualizado);
         return ResponseEntity.ok(convertToDTO(updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        statusService.deleteById(id);
+        sS.deleteByIdStatus(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -14,43 +14,50 @@ import java.util.List;
 public class CameraService {
 
     @Autowired
-    private CameraRepository cameraRepository;
+    private CameraRepository cR;
 
     @Autowired
-    private PatioRepository patioRepository;
+    private PatioRepository pR;
 
-    public List<Camera> findAll() {
-        return cameraRepository.findAll();
+    public List<Camera> findAllCamera() {
+        return cR.findAll();
     }
 
-    public Camera findById(Long id) {
-        return cameraRepository.findById(id)
+    public Camera findByIdCamera(Long id) {
+        return cR.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Camera não encontrada com id: " + id));
     }
+    
+    public List<Camera> findByStatusOperacional(String status) {
+        return cR.findByStatusOperacional(status);
+    }
 
-    public Camera save(Camera camera) {
-        Patio patio = patioRepository.findById(camera.getPatio().getIdPatio())
+    public List<Camera> findByLocalizacaoFisica(String localizacao) {
+        return cR.findByLocalizacaoFisica(localizacao);
+    }
+
+    public Camera saveCamera(Camera camera) {
+        Patio patio = pR.findById(camera.getPatio().getIdPatio())
                 .orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + camera.getPatio().getIdPatio()));
         camera.setPatio(patio);
 
-        return cameraRepository.save(camera);
+        return cR.save(camera);
     }
 
-    public Camera update(Long id, Camera cameraDetails) {
-        Camera camera = findById(id);
+    public Camera updateCamera(Long id, Camera cameraAtualizado) {
+        Camera camera = findByIdCamera(id);
 
-        camera.setStatusOperacional(cameraDetails.getStatusOperacional());
-        camera.setLocalizacaoFisica(cameraDetails.getLocalizacaoFisica());
+        camera.setStatusOperacional(cameraAtualizado.getStatusOperacional());
+        camera.setLocalizacaoFisica(cameraAtualizado.getLocalizacaoFisica());
 
-        Patio patio = patioRepository.findById(cameraDetails.getPatio().getIdPatio())
-                .orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + cameraDetails.getPatio().getIdPatio()));
+        Patio patio = pR.findById(cameraAtualizado.getPatio().getIdPatio()).orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + cameraAtualizado.getPatio().getIdPatio()));
         camera.setPatio(patio);
 
-        return cameraRepository.save(camera);
+        return cR.save(camera);
     }
 
-    public void deleteById(Long id) {
-        Camera camera = findById(id);
-        cameraRepository.delete(camera);
+    public void deleteByIdCamera(Long id) {
+        Camera camera = findByIdCamera(id);
+        cR.delete(camera);
     }
 }

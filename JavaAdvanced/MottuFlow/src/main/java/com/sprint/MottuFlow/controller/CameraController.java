@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class CameraController {
 
     @Autowired
-    private CameraService cameraService;
+    private CameraService cS;
 
     private CameraDTO convertToDTO(Camera camera) {
         return new CameraDTO(
@@ -42,33 +42,46 @@ public class CameraController {
 
     @GetMapping
     public List<CameraDTO> getAll() {
-        List<Camera> cameras = cameraService.findAll();
+        List<Camera> cameras = cS.findAllCamera();
         return cameras.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<CameraDTO> getById(@PathVariable Long id) {
-        Camera camera = cameraService.findById(id);
+        Camera camera = cS.findByIdCamera(id);
         return ResponseEntity.ok(convertToDTO(camera));
     }
+    
+    @GetMapping("/status/{status}")
+    public List<CameraDTO> getByStatusOperacional(@PathVariable String status) {
+        List<Camera> cameras = cS.findByStatusOperacional(status);
+        return cameras.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @GetMapping("/localizacao/{localizacao}")
+    public List<CameraDTO> getByLocalizacaoFisica(@PathVariable String localizacao) {
+        List<Camera> cameras = cS.findByLocalizacaoFisica(localizacao);
+        return cameras.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
 
     @PostMapping
     public ResponseEntity<CameraDTO> create(@RequestBody CameraDTO cameraDTO) {
         Camera camera = convertToEntity(cameraDTO);
-        Camera saved = cameraService.save(camera);
+        Camera saved = cS.saveCamera(camera);
         return ResponseEntity.ok(convertToDTO(saved));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CameraDTO> update(@PathVariable Long id, @RequestBody CameraDTO cameraDTO) {
         Camera cameraDetails = convertToEntity(cameraDTO);
-        Camera updated = cameraService.update(id, cameraDetails);
+        Camera updated = cS.updateCamera(id, cameraDetails);
         return ResponseEntity.ok(convertToDTO(updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        cameraService.deleteById(id);
+        cS.deleteByIdCamera(id);
         return ResponseEntity.noContent().build();
     }
 }

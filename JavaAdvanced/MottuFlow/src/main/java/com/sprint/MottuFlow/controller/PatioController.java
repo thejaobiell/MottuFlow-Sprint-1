@@ -41,29 +41,35 @@ public class PatioController {
         return patios.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<PatioDTO> getById(@PathVariable Long id) {
-        Patio patio = patioService.findById(id);
+        Patio patio = patioService.findByIdPatio(id);
         return ResponseEntity.ok(convertToDTO(patio));
+    }
+    
+    @GetMapping("/search")
+    public List<PatioDTO> searchByEndereco(@RequestParam String endereco) {
+        List<Patio> patios = patioService.findByEnderecoPatio(endereco);
+        return patios.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     @PostMapping
     public ResponseEntity<PatioDTO> create(@RequestBody PatioDTO patioDTO) {
         Patio patio = convertToEntity(patioDTO);
-        Patio saved = patioService.save(patio);
+        Patio saved = patioService.savePatio(patio);
         return ResponseEntity.ok(convertToDTO(saved));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PatioDTO> update(@PathVariable Long id, @RequestBody PatioDTO patioDTO) {
         Patio patioDetails = convertToEntity(patioDTO);
-        Patio updated = patioService.update(id, patioDetails);
+        Patio updated = patioService.updatePatio(id, patioDetails);
         return ResponseEntity.ok(convertToDTO(updated));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        patioService.deletePatio(id);
+        patioService.deletePatioPatio(id);
         return ResponseEntity.noContent().build();
     }
 }

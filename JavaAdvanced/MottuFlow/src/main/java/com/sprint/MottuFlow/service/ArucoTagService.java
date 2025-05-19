@@ -14,43 +14,57 @@ import java.util.List;
 public class ArucoTagService {
 
     @Autowired
-    private ArucoTagRepository arucoTagRepository;
+    private ArucoTagRepository atR;
 
     @Autowired
-    private MotoRepository motoRepository;
+    private MotoRepository mR;
 
-    public List<ArucoTag> findAll() {
-        return arucoTagRepository.findAll();
+    public List<ArucoTag> findAllAruco() {
+        return atR.findAll();
     }
 
-    public ArucoTag findById(Long id) {
-        return arucoTagRepository.findById(id)
+    public ArucoTag findByIdAruco(Long id) {
+        return atR.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ArucoTag não encontrada com id: " + id));
     }
+    
+    public List<ArucoTag> findByStatus(String status) {
+        return atR.findByStatus(status);
+    }
+    
 
-    public ArucoTag save(ArucoTag arucoTag) {
-        Moto moto = motoRepository.findById(arucoTag.getMoto().getIdMoto())
+	public ArucoTag findByCodigoStatus(String codigo) {
+	    ArucoTag tag = atR.findByCodigoNative(codigo);
+	    if (tag == null) {
+	        throw new ResourceNotFoundException("ArucoTag não encontrada com código: " + codigo);
+	    }
+	    return tag;
+	}
+
+
+    public ArucoTag saveAruco(ArucoTag arucoTag) {
+        Moto moto = mR.findById(arucoTag.getMoto().getIdMoto())
                 .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + arucoTag.getMoto().getIdMoto()));
         arucoTag.setMoto(moto);
 
-        return arucoTagRepository.save(arucoTag);
+        return atR.save(arucoTag);
     }
 
-    public ArucoTag update(Long id, ArucoTag arucoTagDetails) {
-        ArucoTag arucoTag = findById(id);
+    public ArucoTag updateAruco(Long id, ArucoTag arucoTagAtualizado) {
+        ArucoTag arucoTag = findByIdAruco(id);
 
-        arucoTag.setCodigo(arucoTagDetails.getCodigo());
-        arucoTag.setStatus(arucoTagDetails.getStatus());
+        arucoTag.setCodigo(arucoTagAtualizado.getCodigo());
+        arucoTag.setStatus(arucoTagAtualizado.getStatus());
 
-        Moto moto = motoRepository.findById(arucoTagDetails.getMoto().getIdMoto())
-                .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + arucoTagDetails.getMoto().getIdMoto()));
+        Moto moto = mR.findById(arucoTagAtualizado.getMoto().getIdMoto())
+                .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + arucoTagAtualizado.getMoto().getIdMoto()));
         arucoTag.setMoto(moto);
 
-        return arucoTagRepository.save(arucoTag);
+        return atR.save(arucoTag);
     }
 
-    public void deleteById(Long id) {
-        ArucoTag arucoTag = findById(id);
-        arucoTagRepository.delete(arucoTag);
+    public void deleteByIdAruco(Long id) {
+        ArucoTag arucoTag = findByIdAruco(id);
+        atR.delete(arucoTag);
     }
 }

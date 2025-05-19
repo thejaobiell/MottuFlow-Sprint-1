@@ -13,5 +13,5 @@ public interface CameraRepository extends JpaRepository<Camera, Long> {
     List<Camera> findByStatusOperacional(@Param("status") String status);
 
     @Query(value = "SELECT * FROM camera WHERE localizacao_fisica LIKE %:localizacao%", nativeQuery = true)
-    List<Camera> findByLocalizacaoFisicaContainingNative(@Param("localizacao") String localizacao);
+    List<Camera> findByLocalizacaoFisica(@Param("localizacao") String localizacao);
 }

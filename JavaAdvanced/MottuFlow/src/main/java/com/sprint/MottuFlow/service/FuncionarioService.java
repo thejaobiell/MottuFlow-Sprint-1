@@ -12,36 +12,40 @@ import java.util.List;
 public class FuncionarioService {
 
     @Autowired
-    private FuncionarioRepository funcionarioRepository;
+    private FuncionarioRepository fR;
 
-    public List<Funcionario> findAll() {
-        return funcionarioRepository.findAll();
+    public List<Funcionario> findAllFuncionario() {
+        return fR.findAll();
     }
 
-    public Funcionario findById(long id) {
-        return funcionarioRepository.findById(id)
+    public Funcionario findByIdFuncionario(Long id) {
+        return fR.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado com id: " + id));
     }
-
-    public Funcionario save(Funcionario funcionario) {
-        return funcionarioRepository.save(funcionario);
+    
+    public Funcionario findCpfFuncionario(String cpf) {
+        return fR.findByCpfNative(cpf);
     }
 
-    public Funcionario update(long id, Funcionario funcionarioDetails) {
-        Funcionario funcionario = findById(id);
-
-        funcionario.setNome(funcionarioDetails.getNome());
-        funcionario.setCpf(funcionarioDetails.getCpf());
-        funcionario.setCargo(funcionarioDetails.getCargo());
-        funcionario.setTelefone(funcionarioDetails.getTelefone());
-        funcionario.setUsuario(funcionarioDetails.getUsuario());
-        funcionario.setSenha(funcionarioDetails.getSenha());
-
-        return funcionarioRepository.save(funcionario);
+    public Funcionario saveFuncionario(Funcionario funcionario) {
+        return fR.save(funcionario);
     }
 
-    public void deleteById(long id) {
-        Funcionario funcionario = findById(id);
-        funcionarioRepository.delete(funcionario);
+    public Funcionario updateFuncionario(Long id, Funcionario funcionarioAtualizado) {
+        Funcionario funcionario = findByIdFuncionario(id);
+
+        funcionario.setNome(funcionarioAtualizado.getNome());
+        funcionario.setCpf(funcionarioAtualizado.getCpf());
+        funcionario.setCargo(funcionarioAtualizado.getCargo());
+        funcionario.setTelefone(funcionarioAtualizado.getTelefone());
+        funcionario.setUsuario(funcionarioAtualizado.getUsuario());
+        funcionario.setSenha(funcionarioAtualizado.getSenha());
+
+        return fR.save(funcionario);
+    }
+
+    public void deleteByIdFuncionario(Long id) {
+        Funcionario funcionario = findByIdFuncionario(id);
+        fR.delete(funcionario);
     }
 }

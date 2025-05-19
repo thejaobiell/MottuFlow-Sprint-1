@@ -13,5 +13,5 @@ public interface StatusRepository extends JpaRepository<Status, Long> {
     List<Status> findByTipoStatus(@Param("tipoStatus") String tipoStatus);
 
     @Query(value = "SELECT * FROM status WHERE descricao LIKE %:descricao%", nativeQuery = true)
-    List<Status> findByDescricaoContainingNative(@Param("descricao") String descricao);
+    List<Status> findByDescricao(@Param("descricao") String descricao);
 }

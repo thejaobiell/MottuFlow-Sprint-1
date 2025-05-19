@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface PatioRepository extends JpaRepository<Patio, Long> {
     @Query("SELECT p FROM Patio p WHERE LOWER(p.nome) LIKE LOWER(CONCAT('%', :nome, '%'))")
-    List<Patio> findByNomeContainingIgnoreCase(@Param("nome") String nome);
+    List<Patio> findByNome(@Param("nome") String nome);
     
-    @Query(value = "SELECT COUNT(*) FROM patio WHERE capacidade_maxima > :capacidade", nativeQuery = true)
-    int countByCapacidadeMaiorQue(@Param("capacidade") int capacidade);
+    @Query("SELECT p FROM Patio p WHERE LOWER(p.endereco) LIKE LOWER(CONCAT('%', :endereco, '%'))")
+    List<Patio> findByEndereco(@Param("endereco") String endereco);
 }

@@ -12,73 +12,77 @@ import com.sprint.MottuFlow.repository.PatioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class LocalidadeService {
 
     @Autowired
-    private LocalidadeRepository localidadeRepository;
+    private LocalidadeRepository lR;
 
     @Autowired
-    private MotoRepository motoRepository;
+    private MotoRepository mR;
 
     @Autowired
-    private PatioRepository patioRepository;
+    private PatioRepository pR;
 
     @Autowired
-    private CameraRepository cameraRepository;
+    private CameraRepository cR;
 
     public List<Localidade> findAll() {
-        return localidadeRepository.findAll();
+        return lR.findAll();
     }
 
     public Localidade findById(Long id) {
-        return localidadeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Localidade não encontrada com id: " + id));
+        return lR.findById(id).orElseThrow(() -> new ResourceNotFoundException("Localidade não encontrada com id: " + id));
     }
+    
+    public List<Localidade> findByPontoReferencia(String ponto) {
+        return lR.findByPontoReferencia(ponto);
+    }
+
+    public List<Localidade> findByDataHoraBetween(LocalDateTime dataInicio, LocalDateTime dataFim) {
+        return lR.findDatas(dataInicio, dataFim);
+    }
+
+
 
     public Localidade save(Localidade localidade) {
-        Moto moto = motoRepository.findById(localidade.getMoto().getIdMoto())
-                .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + localidade.getMoto().getIdMoto()));
+        Moto moto = mR.findById(localidade.getMoto().getIdMoto()).orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + localidade.getMoto().getIdMoto()));
 
-        Patio patio = patioRepository.findById(localidade.getPatio().getIdPatio())
-                .orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + localidade.getPatio().getIdPatio()));
+        Patio patio = pR.findById(localidade.getPatio().getIdPatio()).orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + localidade.getPatio().getIdPatio()));
 
-        Camera camera = cameraRepository.findById(localidade.getCamera().getIdCamera())
-                .orElseThrow(() -> new ResourceNotFoundException("Camera não encontrada com id: " + localidade.getCamera().getIdCamera()));
+        Camera camera = cR.findById(localidade.getCamera().getIdCamera()).orElseThrow(() -> new ResourceNotFoundException("Camera não encontrada com id: " + localidade.getCamera().getIdCamera()));
 
         localidade.setMoto(moto);
         localidade.setPatio(patio);
         localidade.setCamera(camera);
 
-        return localidadeRepository.save(localidade);
+        return lR.save(localidade);
     }
 
-    public Localidade update(Long id, Localidade localidadeDetails) {
+    public Localidade update(Long id, Localidade localidadeAtualizada) {
         Localidade localidade = findById(id);
 
-        localidade.setDataHora(localidadeDetails.getDataHora());
-        localidade.setPontoReferencia(localidadeDetails.getPontoReferencia());
+        localidade.setDataHora(localidadeAtualizada.getDataHora());
+        localidade.setPontoReferencia(localidadeAtualizada.getPontoReferencia());
 
-        Moto moto = motoRepository.findById(localidadeDetails.getMoto().getIdMoto())
-                .orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + localidadeDetails.getMoto().getIdMoto()));
+        Moto moto = mR.findById(localidadeAtualizada.getMoto().getIdMoto()).orElseThrow(() -> new ResourceNotFoundException("Moto não encontrada com id: " + localidadeAtualizada.getMoto().getIdMoto()));
 
-        Patio patio = patioRepository.findById(localidadeDetails.getPatio().getIdPatio())
-                .orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + localidadeDetails.getPatio().getIdPatio()));
+        Patio patio = pR.findById(localidadeAtualizada.getPatio().getIdPatio()).orElseThrow(() -> new ResourceNotFoundException("Patio não encontrado com id: " + localidadeAtualizada.getPatio().getIdPatio()));
 
-        Camera camera = cameraRepository.findById(localidadeDetails.getCamera().getIdCamera())
-                .orElseThrow(() -> new ResourceNotFoundException("Camera não encontrada com id: " + localidadeDetails.getCamera().getIdCamera()));
+        Camera camera = cR.findById(localidadeAtualizada.getCamera().getIdCamera()).orElseThrow(() -> new ResourceNotFoundException("Camera não encontrada com id: " + localidadeAtualizada.getCamera().getIdCamera()));
 
         localidade.setMoto(moto);
         localidade.setPatio(patio);
         localidade.setCamera(camera);
 
-        return localidadeRepository.save(localidade);
+        return lR.save(localidade);
     }
 
     public void deleteById(Long id) {
         Localidade localidade = findById(id);
-        localidadeRepository.delete(localidade);
+        lR.delete(localidade);
     }
 }
