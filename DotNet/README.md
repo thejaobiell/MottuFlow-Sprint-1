@@ -15,7 +15,7 @@ No contexto da disciplina de **IoT**, estamos desenvolvendo uma solução de **v
 
 A API será responsável pela comunicação com o banco de dados criado na disciplina de **Database**, facilitando o envio e recebimento de informações da infraestrutura do projeto.
 
-Além disso, a API será integrada futuramente com o aplicativo mobile em desenvolvimento na disciplina de **Desenvolvimento Mobile**.
+Além disso, a API será integrada futuramente com o aplicativo mobile em desenvolvimento na disciplina de **Mobile Application Development**.
 
 ---
 
