@@ -19,7 +19,7 @@ Este projeto simula um ambiente corporativo real, aplicando conceitos de desenvo
 
 ## 👨‍💻 Integrantes do Grupo
 
-| Nome Completo                           | RA       | Turma     |
+| Nome Completo                           | RM       | Turma     |
 | --------------------------------------- | -------- | --------- |
 | João Gabriel Boaventura Marques e Silva | RM554874 | 2TDSB2025 |
 | Léo Mota Lima                           | RM557851 | 2TDSB2025 |
