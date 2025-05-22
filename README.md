@@ -26,12 +26,3 @@ Este projeto simula um ambiente corporativo real, aplicando conceitos de desenvo
 | Lucas Leal das Chagas                   | RM551124 | 2TDSB2025 |
 
 ---
-
-## 🎓 Informações Acadêmicas
-
-* **Curso**: Análise e Desenvolvimento de Sistemas
-* **Disciplina**: \[Nome da disciplina ou professor, se necessário]
-* **Instituição**: \[Nome da instituição, se aplicável]
-* **Ano/Semestre**: 2025 – 2º semestre
-
-
