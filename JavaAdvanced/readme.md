@@ -1,18 +1,22 @@
-# MottuFlow – API REST em Java
+# 🚀 MottuFlow – API REST em Java
 
-Este repositório contém a implementação da API REST **MottuFlow** desenvolvida na disciplina de **Java Advanced**, como parte do curso de **Análise e Desenvolvimento de Sistemas**.
+Este repositório contém a implementação da API REST **MottuFlow**, desenvolvida como parte da disciplina de **Java Advanced**, no curso de **Análise e Desenvolvimento de Sistemas**.
 
-O projeto tem como objetivo aplicar os conceitos avançados de desenvolvimento Java, incluindo a criação de serviços RESTful com **Spring Boot**, integração com banco de dados e boas práticas de engenharia de software. A aplicação oferece funcionalidades completas de **CRUD** para gerenciamento de:
+A API tem como objetivo oferecer funcionalidades completas de **CRUD** para o gerenciamento de:
 
-- Funcionários  
-- Pátios  
-- Motos  
-- Câmeras  
-- ArUco Tags  
-- Status das motos  
-- Localidades  
+* Funcionários
+* Pátios
+* Motos
+* Câmeras
+* ArUco Tags
+* Status das motos
+* Localidades
 
-> :bulb: Esta API será utilizada como parte de uma solução maior que inclui visão computacional (IoT), banco de dados Oracle, e integração com um app mobile.
+No contexto da disciplina de **IoT**, está sendo desenvolvida uma solução de **visão computacional** que utilizará câmeras para identificar motocicletas por meio de **ArUco Tags**.
+👉 [Exemplo de imagem com ArUco Tag](https://docs.opencv.org/4.x/singlemarkersdetection.jpg)
+
+A API será responsável pela comunicação com o banco de dados criado na disciplina de **Database**, facilitando o envio e recebimento de informações na infraestrutura do projeto.
+Além disso, será futuramente integrada ao aplicativo mobile desenvolvido na disciplina de **Mobile Application Development**.
 
 ---
 
@@ -24,31 +28,43 @@ O projeto tem como objetivo aplicar os conceitos avançados de desenvolvimento J
 
 ## 📚 Tecnologias Utilizadas
 
-- **Java 17+**
-- **Spring Boot**
-- **Spring Data JPA**
-- **Banco de Dados H2** (futuramente implementaremos a integração com o banco de dados ORACLE)
-- **Maven** como gerenciador de dependências
+* **Java 17+**
+* **Spring Boot**
+* **Spring Data JPA**
+* **Banco de Dados H2** (posteriormente será substituído por Oracle)
+* **Maven** (gerenciador de dependências)
 
 ---
 
 ## ⚙️ Como Executar o Projeto
 
-1. **Clone o repositório:**
+### 🔁 Clonar o repositório via terminal:
 
 ```bash
 git clone https://github.com/thejaobiell/MottuFlowJava.git
-cd MottuFlowJava
-````
-
-Claro! Aqui está a **versão melhorada** e mais clara desse trecho para incluir corretamente a explicação sobre o uso do `data.sql` com o banco H2:
+cd MottuFlowJava/MottuFlow
+```
 
 ---
 
-2. **O projeto já está configurado para utilizar o banco de dados H2 em memória**.
-   As configurações estão definidas no arquivo `src/main/resources/application.properties`.
+### 📥 Ou importar o projeto no Eclipse IDE:
 
-> 💡 O projeto inclui um arquivo `data.sql` com comandos `INSERT` para popular automaticamente todas as tabelas com dados iniciais.
+1. Abra o **Eclipse IDE**
+2. Vá em **File > Import...**
+3. Selecione **Maven > Existing Maven Projects**
+4. Clique em **Browse** e selecione a pasta `MottuFlow`
+5. Marque o arquivo `pom.xml`
+6. Clique em **Finish** para concluir a importação
+
+---
+
+### 🛠️ Configuração do Banco de Dados H2
+
+O projeto já está configurado para utilizar o banco de dados H2 em memória. As configurações estão definidas no arquivo:
+
+```
+src/main/resources/application.properties
+```
 
 ```properties
 spring.datasource.url=jdbc:h2:mem:MottuFlow
@@ -66,80 +82,84 @@ spring.sql.init.mode=always
 spring.jpa.defer-datasource-initialization=true
 ```
 
-🔁 **Sobre o `data.sql`:**
+### 🔁 Sobre o `data.sql`
 
-* Para **ativar** a carga automática dos dados de exemplo:
+**Para ativar a carga automática de dados de exemplo:**
 
-  * Mantenha `spring.sql.init.mode=always`
-  * Deixe **descomentada** a linha `spring.jpa.defer-datasource-initialization=true`
+* Deixe `spring.sql.init.mode=always`
+* Mantenha a linha `spring.jpa.defer-datasource-initialization=true` **descomentada**
 
-* Para **desativar** a carga do `data.sql`:
+**Para desativar:**
 
-  * Altere para `spring.sql.init.mode=never`
-  * Comente ou remova a linha `spring.jpa.defer-datasource-initialization=true`
+* Altere `spring.sql.init.mode=never`
+* Comente ou remova `spring.jpa.defer-datasource-initialization=true`
 
-3. **Execute a aplicação:**
+---
+
+### ▶️ Executando a aplicação
+
+#### Via terminal:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-4. **Como utilizar a API:**
+#### Via Eclipse:
 
-> Pelo console H2 em:
+1. Navegue até: `MottuFlow/src/main/java/com/sprint/MottuFlow`
+2. Abra o arquivo `MottuFlowApplication.java`
+3. Clique com o botão direito e selecione **Run As > Java Application**
+
+---
+
+## 🔌 Acessando a API
+
+### 💻 Console H2
+
+Acesse pelo navegador:
+
 ```
-URL: http://localhost:8080/h2-console
+http://localhost:8080/h2-console
 ```
 
-Utilize:
-  * Saved Settings: Generic H2 (Embedded)
-  * Settings Name: Generic H2 (Embedded)
-  * DriverClass: ```org.h2.Driver```
-  * JDBC URL: ```jdbc:h2:mem:MottuFlow```
-  * User Name: ```sa```
-  * Password: 
+Preencha com os dados:
 
-
-> Acessando pelo POSTMAN:
-Importe a Pasta **JSONS POSTMAN** no POSTMAN em:
-1. Clique em **File**;
-2. Depois em **Import**;
-3. Por fim **arraste a pasta até o retângulo de arraste** ou clique em **Select Folder** e selecione a pasta ***JSONS POSTMAN***
-4. E enfim faça os testes da api.
+* **JDBC URL:** `jdbc:h2:mem:MottuFlow`
+* **User Name:** `sa`
+* **Password:** *(deixe em branco)*
+* **Driver Class:** `org.h2.Driver`
 
 ---
 
-## 📂 Estrutura de Diretórios
+### 📮 Testes com Postman
 
-* `controller/` – Camada de controle com os endpoints da API
-* `service/` – Regras de negócio
-* `repository/` – Interfaces JPA para persistência
-* `model/` – Entidades do sistema
-* `dto/` – Objetos de Transferência de Dados
-* `config/` – Configurações da aplicação
+1. Abra o **Postman**
+2. Clique em **File > Import**
+3. Selecione ou arraste a pasta **JSONS POSTMAN**
+4. Realize os testes da API com os exemplos fornecidos
 
 ---
 
-## ✅ Funcionalidades
+## ✅ Funcionalidades Disponíveis
 
-A API oferece operações CRUD para as seguintes entidades:
+A API oferece operações CRUD completas para as seguintes entidades:
 
-* **Funcionários**
-* **Pátios**
-* **Motos**
-* **Câmeras**
-* **ArUco Tags**
-* **Status das motos**
-* **Localidades**
+* Funcionários
+* Pátios
+* Motos
+* Câmeras
+* ArUco Tags
+* Status das motos
+* Localidades
 
-> Todas as requisições e respostas utilizam o formato JSON.
+> Todas as requisições e respostas seguem o formato **JSON**.
 
 ---
 
-## 📎 Observações
+## 🧭 Observações
 
-* O projeto segue o padrão de arquitetura em camadas.
-* Utiliza **DTOs** para separar modelo de domínio dos dados expostos.
+* O projeto segue o padrão de arquitetura em camadas
+* Utiliza **DTOs** para separar o modelo de domínio dos dados expostos
 
 ---
 
