@@ -1,13 +1,35 @@
 package com.sprint.MottuFlow.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class FuncionarioDTO {
 
     private Long id;
+    
+    @NotBlank(message = "Nome é obrigatório")
+    @Size(max = 100)
     private String nome;
+
+    @NotBlank(message = "CPF é obrigatório")
+    @Size(min = 11, max = 11, message = "CPF deve ter exatamente 11 caracteres")
     private String cpf;
+
+
+    @NotBlank(message = "Cargo é obrigatório")
+    @Size(max = 50)
     private String cargo;
+
+    @NotBlank(message = "Telefone é obrigatório")
+    @Size(max = 20)
     private String telefone;
+
+    @NotBlank(message = "Usuário é obrigatório")
+    @Size(max = 50)
     private String usuario;
+
+    @NotBlank(message = "Senha é obrigatória")
+    @Size(max = 100)
     private String senha;
 
     public FuncionarioDTO() {}

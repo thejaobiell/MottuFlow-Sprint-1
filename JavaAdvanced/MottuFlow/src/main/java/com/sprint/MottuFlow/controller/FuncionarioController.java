@@ -3,6 +3,9 @@ package com.sprint.MottuFlow.controller;
 import com.sprint.MottuFlow.dto.FuncionarioDTO;
 import com.sprint.MottuFlow.model.Funcionario;
 import com.sprint.MottuFlow.service.FuncionarioService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +67,7 @@ public class FuncionarioController {
 
     
     @PostMapping
-    public ResponseEntity<FuncionarioDTO> create(@RequestBody FuncionarioDTO funcionarioDTO) {
+    public ResponseEntity<FuncionarioDTO> create(@RequestBody @Valid FuncionarioDTO funcionarioDTO) {
         Funcionario funcionario = convertToEntity(funcionarioDTO);
         Funcionario saved = fS.saveFuncionario(funcionario);
         return ResponseEntity.ok(convertToDTO(saved));

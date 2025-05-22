@@ -1,10 +1,20 @@
 package com.sprint.MottuFlow.dto;
 
+import jakarta.validation.constraints.*;
+
 public class ArucoTagDTO {
 
     private Long idTag;
+
+    @NotBlank
+    @Size(max = 50)
     private String codigo;
+
+    @NotNull
     private Long idMoto;
+
+    @NotBlank
+    @Size(max = 20)
     private String status;
 
     public ArucoTagDTO() {}

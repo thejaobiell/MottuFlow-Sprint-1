@@ -1,14 +1,26 @@
 package com.sprint.MottuFlow.dto;
 
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
 public class LocalidadeDTO {
 
     private Long idLocalidade;
+
+    @NotNull
     private LocalDateTime dataHora;
+
+    @NotNull
     private Long idMoto;
+
+    @NotNull
     private Long idPatio;
+
+    @NotBlank
+    @Size(max = 100)
     private String pontoReferencia;
+
+    @NotNull
     private Long idCamera;
 
     public LocalidadeDTO() {}

@@ -1,14 +1,25 @@
 package com.sprint.MottuFlow.dto;
 
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
 public class StatusDTO {
 
     private Long idStatus;
+
+    @NotNull
     private Long idMoto;
+
+    @NotBlank
+    @Size(max = 50)
     private String tipoStatus;
+
+    @Size(max = 255)
     private String descricao;
+
     private LocalDateTime dataStatus;
+
+    @NotNull
     private Long idFuncionario;
 
     public StatusDTO() {}

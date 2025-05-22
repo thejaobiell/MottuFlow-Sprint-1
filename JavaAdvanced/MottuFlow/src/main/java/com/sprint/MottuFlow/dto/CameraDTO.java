@@ -1,10 +1,20 @@
 package com.sprint.MottuFlow.dto;
 
+import jakarta.validation.constraints.*;
+
 public class CameraDTO {
 
     private Long idCamera;
+
+    @NotBlank
+    @Size(max = 20)
     private String statusOperacional;
+
+    @NotBlank
+    @Size(max = 255)
     private String localizacaoFisica;
+
+    @NotNull
     private Long idPatio;
 
     public CameraDTO() {}

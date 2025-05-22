@@ -3,6 +3,9 @@ package com.sprint.MottuFlow.controller;
 import com.sprint.MottuFlow.dto.ArucoTagDTO;
 import com.sprint.MottuFlow.model.ArucoTag;
 import com.sprint.MottuFlow.service.ArucoTagService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +69,7 @@ public class ArucoTagController {
 
 
     @PostMapping
-    public ResponseEntity<ArucoTagDTO> create(@RequestBody ArucoTagDTO tagDTO) {
+    public ResponseEntity<ArucoTagDTO> create(@RequestBody @Valid ArucoTagDTO tagDTO) {
         ArucoTag tag = convertToEntity(tagDTO);
         ArucoTag saved = atS.saveAruco(tag);
         return ResponseEntity.ok(convertToDTO(saved));

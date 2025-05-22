@@ -3,6 +3,9 @@ package com.sprint.MottuFlow.controller;
 import com.sprint.MottuFlow.dto.CameraDTO;
 import com.sprint.MottuFlow.model.Camera;
 import com.sprint.MottuFlow.service.CameraService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +69,7 @@ public class CameraController {
 
 
     @PostMapping
-    public ResponseEntity<CameraDTO> create(@RequestBody CameraDTO cameraDTO) {
+    public ResponseEntity<CameraDTO> create(@RequestBody @Valid CameraDTO cameraDTO) {
         Camera camera = convertToEntity(cameraDTO);
         Camera saved = cS.saveCamera(camera);
         return ResponseEntity.ok(convertToDTO(saved));

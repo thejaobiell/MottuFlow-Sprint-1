@@ -3,6 +3,9 @@ package com.sprint.MottuFlow.controller;
 import com.sprint.MottuFlow.dto.StatusDTO;
 import com.sprint.MottuFlow.model.Status;
 import com.sprint.MottuFlow.service.StatusService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,7 +77,7 @@ public class StatusController {
 
 
     @PostMapping
-    public ResponseEntity<StatusDTO> create(@RequestBody StatusDTO statusDTO) {
+    public ResponseEntity<StatusDTO> create(@RequestBody @Valid StatusDTO statusDTO) {
         Status status = convertToEntity(statusDTO);
         Status saved = sS.saveStatus(status);
         return ResponseEntity.ok(convertToDTO(saved));

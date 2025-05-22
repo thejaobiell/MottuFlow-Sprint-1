@@ -3,6 +3,9 @@ package com.sprint.MottuFlow.controller;
 import com.sprint.MottuFlow.dto.PatioDTO;
 import com.sprint.MottuFlow.model.Patio;
 import com.sprint.MottuFlow.service.PatioService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +57,7 @@ public class PatioController {
     }
 
     @PostMapping
-    public ResponseEntity<PatioDTO> create(@RequestBody PatioDTO patioDTO) {
+    public ResponseEntity<PatioDTO> create(@RequestBody @Valid PatioDTO patioDTO) {
         Patio patio = convertToEntity(patioDTO);
         Patio saved = patioService.savePatio(patio);
         return ResponseEntity.ok(convertToDTO(saved));

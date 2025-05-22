@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Recurso não encontrado
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFound(ResourceNotFoundException ex) {
         Map<String, Object> body = new HashMap<>();
@@ -26,7 +25,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
 
-    // Erros de validação (Bean Validation)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationErrors(MethodArgumentNotValidException ex) {
         Map<String, Object> body = new HashMap<>();
@@ -36,7 +34,8 @@ public class GlobalExceptionHandler {
             .stream()
             .collect(Collectors.toMap(
                 fieldError -> fieldError.getField(),
-                fieldError -> fieldError.getDefaultMessage()
+                fieldError -> fieldError.getDefaultMessage(),
+                (existing, replacement) -> existing 
             ));
 
         body.put("message", "ERRO DE VALIDAÇÃO");
@@ -48,7 +47,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
-    // Outras exceções genéricas
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGenericException(Exception ex) {
         Map<String, Object> body = new HashMap<>();

@@ -1,13 +1,34 @@
 package com.sprint.MottuFlow.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class MotoDTO {
 
-    private Long idMoto;
+	private Long idMoto;
+
+    @NotBlank
+    @Size(max = 10)
     private String placa;
+
+    @NotBlank
+    @Size(max = 50)
     private String modelo;
+
+    @NotBlank
+    @Size(max = 50)
     private String fabricante;
+
+    @Min(1900)
     private int ano;
+
+    @NotNull
     private Long idPatio;
+
+    @NotBlank
+    @Size(max = 100)
     private String localizacaoAtual;
 
     public MotoDTO() {}

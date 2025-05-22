@@ -3,6 +3,9 @@ package com.sprint.MottuFlow.controller;
 import com.sprint.MottuFlow.dto.LocalidadeDTO;
 import com.sprint.MottuFlow.model.Localidade;
 import com.sprint.MottuFlow.service.LocalidadeService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -84,7 +87,7 @@ public class LocalidadeController {
 
 
     @PostMapping
-    public ResponseEntity<LocalidadeDTO> create(@RequestBody LocalidadeDTO localidadeDTO) {
+    public ResponseEntity<LocalidadeDTO> create(@RequestBody @Valid LocalidadeDTO localidadeDTO) {
         Localidade localidade = convertToEntity(localidadeDTO);
         Localidade saved = localidadeService.save(localidade);
         return ResponseEntity.ok(convertToDTO(saved));

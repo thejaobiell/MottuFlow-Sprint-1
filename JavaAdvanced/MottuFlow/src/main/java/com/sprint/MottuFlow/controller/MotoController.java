@@ -3,6 +3,9 @@ package com.sprint.MottuFlow.controller;
 import com.sprint.MottuFlow.dto.MotoDTO;
 import com.sprint.MottuFlow.model.Moto;
 import com.sprint.MottuFlow.service.MotoService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,7 +77,7 @@ public class MotoController {
 
 
     @PostMapping
-    public ResponseEntity<MotoDTO> create(@RequestBody MotoDTO motoDTO) {
+    public ResponseEntity<MotoDTO> create(@RequestBody @Valid MotoDTO motoDTO) {
         Moto moto = convertToEntity(motoDTO);
         Moto saved = motoService.saveMoto(moto);
         return ResponseEntity.ok(convertToDTO(saved));
