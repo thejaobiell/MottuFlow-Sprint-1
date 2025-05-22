@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "b2cdc37d-a4af-4c5f-a1dc-f7483064548f",
+		"name": "4Camera API - MottuFlow",
+		"description": "CRUD completo para entidade Camera",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39334205"
+	},
+	"item": [
+		{
+			"name": "Criar Camera (POST)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"statusOperacional\": \"ATIVA\",\n  \"localizacaoFisica\": \"Entrada do Patio\",\n  \"idPatio\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cameras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cameras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Cameras (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cameras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cameras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Camera por ID (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cameras/id/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cameras",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Camera por StatusOperacional(GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cameras/status/Operacional",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cameras",
+						"status",
+						"Operacional"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Camera por Localizacao Fisica (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cameras/localizacao/Entrada Patio Central",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cameras",
+						"localizacao",
+						"Entrada Patio Central"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Camera (PUT)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idCamera\": 1,\n  \"statusOperacional\": \"INATIVA\",\n  \"localizacaoFisica\": \"Saida do Patio\",\n  \"idPatio\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cameras/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cameras",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Camera (DELETE)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cameras/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cameras",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

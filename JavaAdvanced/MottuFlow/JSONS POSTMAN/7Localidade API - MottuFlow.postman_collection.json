@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "f8cc3fd4-a079-40e6-92e5-05d7213da6f1",
+		"name": "7Localidade API - MottuFlow",
+		"description": "CRUD completo para entidade Localidade",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39334205"
+	},
+	"item": [
+		{
+			"name": "Criar Localidade (POST)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dataHora\": \"2025-05-18T20:00:00\",\n  \"idMoto\": 1,\n  \"idPatio\": 1,\n  \"pontoReferencia\": \"Entrada Principal\",\n  \"idCamera\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/localidades",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localidades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Localidades (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/localidades",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localidades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Localidade por ID (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/localidades/id/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localidades",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Localidade por Ponto Referencia (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/localidades/ponto-referencia/Portao A",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localidades",
+						"ponto-referencia",
+						"Portao A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Localidade por Datas (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/localidades/periodo?dataInicio=2025-05-16T08:00:00&dataFim=2025-05-16T08:20:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localidades",
+						"periodo"
+					],
+					"query": [
+						{
+							"key": "dataInicio",
+							"value": "2025-05-16T08:00:00"
+						},
+						{
+							"key": "dataFim",
+							"value": "2025-05-16T08:20:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Localidade (PUT)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idLocalidade\": 1,\n  \"dataHora\": \"2025-05-19T08:00:00\",\n  \"idMoto\": 1,\n  \"idPatio\": 2,\n  \"pontoReferencia\": \"Saida Principal\",\n  \"idCamera\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/localidades/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localidades",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Localidade (DELETE)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/localidades/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"localidades",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
