@@ -33,7 +33,7 @@ Além disso, a API será integrada futuramente com o aplicativo mobile em desenv
 # 1. Clone o repositório
 ```bash
 git clone https://github.com/thejaobiell/MottuFlowDotNet.git
-cd mottuflow-api
+cd MottuFlowDotNet/mottuflow-api
 ```
 
 # 2. Restaure os pacotes
