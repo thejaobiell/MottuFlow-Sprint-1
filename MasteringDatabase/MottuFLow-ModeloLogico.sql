@@ -1,21 +1,20 @@
 /*
                         MOTTU-FLOW
-    João Gabriel Boaventura Marques e Silva | RM554874 | 2TDSB-2025
-    Léo Motta Lima | RM557851 | 2TDSB-2025
+    Joao Gabriel Boaventura Marques e Silva | RM554874 | 2TDSB-2025
+    Leo Motta Lima | RM557851 | 2TDSB-2025
     Lucas Leal das Chagas | RM551124 | 2TDSB-2025
 */
 
-
 DROP TABLE funcionario CASCADE CONSTRAINTS;
-DROP TABLE status CASCADE CONSTRAINTS;
 DROP TABLE patio CASCADE CONSTRAINTS;
 DROP TABLE moto CASCADE CONSTRAINTS;
 DROP TABLE camera CASCADE CONSTRAINTS;
 DROP TABLE aruco_tag CASCADE CONSTRAINTS;
+DROP TABLE status CASCADE CONSTRAINTS;
 DROP TABLE localidade CASCADE CONSTRAINTS;
 
 CREATE TABLE funcionario (
-    ID  INTEGER PRIMARY KEY,
+    ID  NUMBER PRIMARY KEY,
     nome VARCHAR2(100 BYTE) NOT NULL,
     cpf VARCHAR2(14 BYTE) NOT NULL,
     cargo VARCHAR2(50 BYTE) NOT NULL,
@@ -25,61 +24,62 @@ CREATE TABLE funcionario (
 );
 
 CREATE TABLE patio (
-    id_patio INTEGER PRIMARY KEY,
+    id_patio NUMBER PRIMARY KEY,
     nome VARCHAR2(100 BYTE) NOT NULL,
     endereco VARCHAR2(200 BYTE) NOT NULL,
-    capacidade_maxima INTEGER NOT NULL
+    capacidade_maxima NUMBER NOT NULL
 );
 
 CREATE TABLE moto (
-    id_moto INTEGER PRIMARY KEY,
+    id_moto NUMBER PRIMARY KEY,
     placa VARCHAR2(10 BYTE) NOT NULL,
     modelo VARCHAR2(50 BYTE) NOT NULL,
     fabricante VARCHAR2(50 BYTE) NOT NULL,
-    ano INTEGER NOT NULL,
-    id_patio INTEGER NOT NULL,
+    ano NUMBER NOT NULL,
+    id_patio NUMBER NOT NULL,
     localizacao_atual VARCHAR2(100 BYTE) NOT NULL,
     FOREIGN KEY (id_patio) REFERENCES patio(id_patio)
 );
 
 CREATE TABLE camera (
-    id_camera INTEGER PRIMARY KEY,
+    id_camera NUMBER PRIMARY KEY,
     status_operacional VARCHAR2(20 BYTE) NOT NULL,
     localizacao_fisica VARCHAR2(255 BYTE) NOT NULL,
-    id_patio INTEGER NOT NULL,
+    id_patio NUMBER NOT NULL,
     FOREIGN KEY (id_patio) REFERENCES patio(id_patio)
 );
 
 CREATE TABLE aruco_tag (
-    id_tag INTEGER PRIMARY KEY,
+    id_tag NUMBER PRIMARY KEY,
     codigo VARCHAR2(50 BYTE) NOT NULL,
-    id_moto INTEGER NOT NULL,
+    id_moto NUMBER NOT NULL,
     status VARCHAR2(20 BYTE) NOT NULL,
     FOREIGN KEY (id_moto) REFERENCES moto(id_moto)
 );
 
 CREATE TABLE status (
-    id_status INTEGER PRIMARY KEY,
-    id_moto INTEGER NOT NULL,
+    id_status NUMBER PRIMARY KEY,
+    id_moto NUMBER NOT NULL,
     tipo_status VARCHAR2(50 BYTE) NOT NULL,
     descricao VARCHAR2(255 BYTE),
     data_status TIMESTAMP DEFAULT current_timestamp,
-    id_funcionario INTEGER NOT NULL,
+    id_funcionario NUMBER NOT NULL,
     FOREIGN KEY (id_moto) REFERENCES moto(id_moto),
     FOREIGN KEY (id_funcionario) REFERENCES funcionario(ID)
 );
 
 CREATE TABLE localidade (
-    id_localidade INTEGER PRIMARY KEY,
+    id_localidade NUMBER PRIMARY KEY,
     data_hora TIMESTAMP NOT NULL,
-    id_moto INTEGER NOT NULL,
-    id_patio INTEGER NOT NULL,
+    id_moto NUMBER NOT NULL,
+    id_patio NUMBER NOT NULL,
     ponto_referencia VARCHAR2(100 BYTE) NOT NULL,
-    id_camera INTEGER NOT NULL,
+    id_camera NUMBER NOT NULL,
     FOREIGN KEY (id_moto) REFERENCES moto(id_moto),
     FOREIGN KEY (id_patio) REFERENCES patio(id_patio),
     FOREIGN KEY (id_camera) REFERENCES camera(id_camera)
 );
+
 
 INSERT INTO funcionario (ID, nome, cpf, cargo, telefone, usuario, senha) VALUES (1, 'Joao Silva', '12345678900', 'Gerente', '11999990001', 'joaosilva', 'senha123');
 INSERT INTO funcionario (ID, nome, cpf, cargo, telefone, usuario, senha) VALUES (2, 'Maria Souza', '22345678900', 'Tecnico', '11999990002', 'mariasouza', 'senha123');
@@ -111,12 +111,11 @@ INSERT INTO aruco_tag (id_tag, codigo, id_moto, status) VALUES (3, 'TAG003', 3, 
 INSERT INTO aruco_tag (id_tag, codigo, id_moto, status) VALUES (4, 'TAG004', 4, 'Ativo');
 INSERT INTO aruco_tag (id_tag, codigo, id_moto, status) VALUES (5, 'TAG005', 5, 'Manutencao');
 
-INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (1, 1, 'Disponível', 'Moto pronta para uso e em boas condições.', 1, TIMESTAMP '2025-05-16 08:00:00');
-INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (2, 2, 'Inativo', 'Aguardando documentação.', 3, TIMESTAMP '2025-05-16 08:10:00');
-INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (3, 3, 'Manutenção', 'Substituição de corrente e revisão geral.', 2, TIMESTAMP '2025-05-16 08:20:00');
+INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (1, 1, 'Disponivel', 'Moto pronta para uso e em boas condicoes.', 1, TIMESTAMP '2025-05-16 08:00:00');
+INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (2, 2, 'Inativo', 'Aguardando documentacao.', 3, TIMESTAMP '2025-05-16 08:10:00');
+INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (3, 3, 'Manutencao', 'Substituicao de corrente e revisao geral.', 2, TIMESTAMP '2025-05-16 08:20:00');
 INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (4, 4, 'Reservado', 'Reservada para cliente via aplicativo.', 4, TIMESTAMP '2025-05-16 08:30:00');
-INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (5, 5, 'Baixa por Boletim de Ocorrência', 'Moto furtada, boletim registrado.', 1, TIMESTAMP '2025-05-16 08:40:00');
-
+INSERT INTO status (id_status, id_moto, tipo_status, descricao, id_funcionario, data_status)VALUES (5, 5, 'Baixa por Boletim de Ocorrencia', 'Moto furtada, boletim registrado.', 1, TIMESTAMP '2025-05-16 08:40:00');
 
 
 INSERT INTO localidade (id_localidade, data_hora, id_moto, id_patio, ponto_referencia, id_camera) VALUES (1, TIMESTAMP '2025-05-16 08:00:00', 1, 1, 'Portao A', 1);
@@ -125,11 +124,20 @@ INSERT INTO localidade (id_localidade, data_hora, id_moto, id_patio, ponto_refer
 INSERT INTO localidade (id_localidade, data_hora, id_moto, id_patio, ponto_referencia, id_camera) VALUES (4, TIMESTAMP '2025-05-16 08:30:00', 4, 4, 'Portao D', 4);
 INSERT INTO localidade (id_localidade, data_hora, id_moto, id_patio, ponto_referencia, id_camera) VALUES (5, TIMESTAMP '2025-05-16 08:40:00', 5, 5, 'Portao E', 5);
 
------------------
-/*1º PLSQL*/
+SELECT * FROM moto;
+SELECT * FROM funcionario;
+SELECT * FROM patio;
+SELECT * FROM camera;
+SELECT * FROM aruco_tag;
+SELECT * FROM status;
+SELECT * FROM localidade;
 
+
+-----------------
+/*1- PLSQL*/
 SET SERVEROUTPUT ON
 SET VERIFY OFF
+
 DECLARE
     CURSOR c_status_por_funcionario IS SELECT F.nome AS nome_funcionario, COUNT(S.id_status) AS total_status, 
     COUNT(DISTINCT S.id_moto) AS motos_distintas FROM funcionario F 
@@ -139,16 +147,15 @@ DECLARE
     v_total_status NUMBER;
     v_motos_distintas NUMBER;
 BEGIN
-    dbms_output.put_line('--- STATUS POR FUNCIONÁRIO ---');
+    dbms_output.put_line('--- STATUS POR FUNCIONARIO ---');
     FOR item IN c_status_por_funcionario LOOP
-        dbms_output.put_line('Funcionário: ' || item.nome_funcionario ||' | Total de Status: ' || item.total_status || ' | Motos distintas: ' || item.motos_distintas);
+        dbms_output.put_line('Funcionario: ' || item.nome_funcionario ||' | Total de Status: ' || item.total_status || ' | Motos distintas: ' || item.motos_distintas);
     END LOOP;
 END;
 /
 
 ------------------
-/*2º PLSQL*/
-
+/*2- PLSQL*/
 DECLARE
     CURSOR c_registro_moto_localizacao IS 
     SELECT P.nome AS nome_patio, C.localizacao_fisica AS camera_local, COUNT(L.id_localidade) AS total_registros FROM localidade L 
@@ -157,21 +164,21 @@ DECLARE
         GROUP BY P.nome, C.localizacao_fisica
         ORDER BY P.nome, total_registros DESC;
 BEGIN
-    dbms_output.put_line('--- REGISTROS POR CÂMERA E PÁTIO ---');
+    dbms_output.put_line('--- REGISTROS POR CAMERA E PATIO ---');
     FOR item IN c_registro_moto_localizacao LOOP
-        dbms_output.put_line('Pátio: ' || item.nome_patio ||' | Câmera: ' || item.camera_local ||
+        dbms_output.put_line('Patio: ' || item.nome_patio ||' | Camera: ' || item.camera_local ||
                              ' | Total Registros: ' || item.total_registros);
     END LOOP;
 END;
 /
 
 ----------------
-/*3º PLSQL*/
+/*3- PLSQL*/
 SELECT 
-    id_moto AS ID, modelo,nvl(LAG(localizacao_atual) OVER (ORDER BY id_moto), 'Vazio') AS localizacao_anterior,
+    id_moto AS ID, modelo,
+    nvl(LAG(localizacao_atual) OVER (ORDER BY id_moto), 'Vazio') AS localizacao_anterior,
     localizacao_atual AS localizacao_atual,
     nvl(LEAD(localizacao_atual) OVER (ORDER BY id_moto), 'Vazio') AS localizacao_proxima
-FROM 
-    moto
+FROM moto
 FETCH FIRST 5 ROWS ONLY;
 /
