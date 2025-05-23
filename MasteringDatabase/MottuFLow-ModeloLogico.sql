@@ -14,7 +14,7 @@ DROP TABLE status CASCADE CONSTRAINTS;
 DROP TABLE localidade CASCADE CONSTRAINTS;
 
 CREATE TABLE funcionario (
-    ID  NUMBER PRIMARY KEY,
+    ID  NUMBER(10) PRIMARY KEY,
     nome VARCHAR2(100 BYTE) NOT NULL,
     cpf VARCHAR2(14 BYTE) NOT NULL,
     cargo VARCHAR2(50 BYTE) NOT NULL,
@@ -24,57 +24,57 @@ CREATE TABLE funcionario (
 );
 
 CREATE TABLE patio (
-    id_patio NUMBER PRIMARY KEY,
+    id_patio NUMBER(10) PRIMARY KEY,
     nome VARCHAR2(100 BYTE) NOT NULL,
     endereco VARCHAR2(200 BYTE) NOT NULL,
     capacidade_maxima NUMBER NOT NULL
 );
 
 CREATE TABLE moto (
-    id_moto NUMBER PRIMARY KEY,
+    id_moto NUMBER(10) PRIMARY KEY,
     placa VARCHAR2(10 BYTE) NOT NULL,
     modelo VARCHAR2(50 BYTE) NOT NULL,
     fabricante VARCHAR2(50 BYTE) NOT NULL,
-    ano NUMBER NOT NULL,
-    id_patio NUMBER NOT NULL,
+    ano NUMBER(4) NOT NULL,
+    id_patio NUMBER(10) NOT NULL,
     localizacao_atual VARCHAR2(100 BYTE) NOT NULL,
     FOREIGN KEY (id_patio) REFERENCES patio(id_patio)
 );
 
 CREATE TABLE camera (
-    id_camera NUMBER PRIMARY KEY,
+    id_camera NUMBER(10) PRIMARY KEY,
     status_operacional VARCHAR2(20 BYTE) NOT NULL,
     localizacao_fisica VARCHAR2(255 BYTE) NOT NULL,
-    id_patio NUMBER NOT NULL,
+    id_patio NUMBER(10) NOT NULL,
     FOREIGN KEY (id_patio) REFERENCES patio(id_patio)
 );
 
 CREATE TABLE aruco_tag (
-    id_tag NUMBER PRIMARY KEY,
+    id_tag NUMBER(10) PRIMARY KEY,
     codigo VARCHAR2(50 BYTE) NOT NULL,
-    id_moto NUMBER NOT NULL,
+    id_moto NUMBER(10) NOT NULL,
     status VARCHAR2(20 BYTE) NOT NULL,
     FOREIGN KEY (id_moto) REFERENCES moto(id_moto)
 );
 
 CREATE TABLE status (
-    id_status NUMBER PRIMARY KEY,
-    id_moto NUMBER NOT NULL,
+    id_status NUMBER(10) PRIMARY KEY,
+    id_moto NUMBER(10) NOT NULL,
     tipo_status VARCHAR2(50 BYTE) NOT NULL,
     descricao VARCHAR2(255 BYTE),
     data_status TIMESTAMP DEFAULT current_timestamp,
-    id_funcionario NUMBER NOT NULL,
+    id_funcionario NUMBER(10) NOT NULL,
     FOREIGN KEY (id_moto) REFERENCES moto(id_moto),
     FOREIGN KEY (id_funcionario) REFERENCES funcionario(ID)
 );
 
 CREATE TABLE localidade (
-    id_localidade NUMBER PRIMARY KEY,
+    id_localidade NUMBER(10) PRIMARY KEY,
     data_hora TIMESTAMP NOT NULL,
-    id_moto NUMBER NOT NULL,
-    id_patio NUMBER NOT NULL,
+    id_moto NUMBER(10) NOT NULL,
+    id_patio NUMBER(10) NOT NULL,
     ponto_referencia VARCHAR2(100 BYTE) NOT NULL,
-    id_camera NUMBER NOT NULL,
+    id_camera NUMBER(10) NOT NULL,
     FOREIGN KEY (id_moto) REFERENCES moto(id_moto),
     FOREIGN KEY (id_patio) REFERENCES patio(id_patio),
     FOREIGN KEY (id_camera) REFERENCES camera(id_camera)
@@ -179,6 +179,5 @@ SELECT
     nvl(LAG(localizacao_atual) OVER (ORDER BY id_moto), 'Vazio') AS localizacao_anterior,
     localizacao_atual AS localizacao_atual,
     nvl(LEAD(localizacao_atual) OVER (ORDER BY id_moto), 'Vazio') AS localizacao_proxima
-FROM moto
-FETCH FIRST 5 ROWS ONLY;
+FROM moto;
 /
