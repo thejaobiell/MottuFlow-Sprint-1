@@ -21,7 +21,7 @@ Este projeto automatiza a criação de uma VM no Azure, instalação do Docker e
 
 - Azure CLI instalado e autenticado (`az login`)
 - Fazer o git clone do [repositório da API em Java](https://github.com/thejaobiell/MottuFlowJava)
-  >OBS: Em **MottuFlow/devops** tem todos os arquivos requisítados.
+  >OBS: Em **MottuFlowJava/MottuFlow/devops** tem todos os arquivos requisítados.
 - Dois arquivos prontos:
   - `vm-deploy.sh` – cria e configura a VM
   - `instalar-dockerVM.sh` – instala Docker e reinicia a VM
