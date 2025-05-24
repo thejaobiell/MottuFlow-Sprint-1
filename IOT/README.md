@@ -79,5 +79,10 @@ Ou execute a célula no Google Colab.
 * Imagens estáticas serão processadas uma única vez.
 
 ---
+## 👨‍💻 Integrantes do Grupo
 
-Se quiser, posso formatar isso em PDF ou README.md também. Deseja isso?
+| Nome Completo                           | RM       | Turma     |
+| --------------------------------------- | -------- | --------- |
+| João Gabriel Boaventura Marques e Silva | RM554874 | 2TDSB2025 |
+| Léo Mota Lima                           | RM557851 | 2TDSB2025 |
+| Lucas Leal das Chagas !                 | RM551124 | 2TDSB2025 |
