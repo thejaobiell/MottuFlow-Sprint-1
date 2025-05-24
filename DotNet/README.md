@@ -156,9 +156,8 @@ Os principais endpoints estão organizados por entidade:
 
 ---
 
+## 👥 Alunos
 
-## 👥 Equipe de Desenvolvimento
-
-- **João Gabriel Boaventura Marques e Silva** - RM554874 - 2TDSB2025
-- **Léo Mota Lima** - RM557851 - 2TDSB2025
-- **Lucas Leal das Chagas** - RM551124 - 2TDSB2025
+* [João Gabriel Boaventura Marques e Silva  | RM554874 | 2TDSB-2025](https://github.com/thejaobiell)
+* [Léo Mota Lima | RM557851 | 2TDSB-2025](https://github.com/leomotalima)
+* [Lucas Leal das Chagas | RM551124 | 2TDSB-2025](https://github.com/LucasLDC)
