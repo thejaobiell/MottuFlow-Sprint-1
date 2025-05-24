@@ -50,6 +50,9 @@ Script que será executado **dentro da VM**, com as seguintes responsabilidades:
 - Reiniciar a máquina para aplicar as permissões
 
 ---
+Ótimo! Aqui está uma versão revisada da instrução, incluindo a dica sobre o uso do `chmod +x` caso necessário:
+
+---
 
 ## ✅ Etapa 2 – Executar os scripts
 
@@ -59,15 +62,19 @@ No terminal da sua máquina local, execute:
 bash vm-deploy.sh
 # ou
 ./vm-deploy.sh
-````
+```
 
-Esse comando irá:
+> 💡 **Dica:** Se o script não tiver permissão de execução, use o comando abaixo para torná-lo executável:
+>
+> ```bash
+> chmod +x nome-do-arquivo.sh
+> ```
 
-* Criar toda a infraestrutura
-* Instalar o Docker
-* Reiniciar a VM automaticamente
+### Scripts disponíveis:
 
----
+* `vm-deploy.sh`
+* `instalar-dockerVM.sh` 
+* `limparVM.sh` 
 
 ### ⚠️ ATENÇÃO!
 
@@ -147,6 +154,8 @@ SELECT * FROM LOCALIDADE;
 Após finalizar o uso da API na VM, execute localmente o script:
 
 ```bash
+./limparVM.sh
+ou
 bash limparVM.sh
 ```
 
