@@ -80,8 +80,8 @@ A API realiza a comunicação com o banco de dados criado na disciplina de **Dat
 
 ---
 
-## 👥 Contribuidores
+## 👥 Alunos
 
-* [João Gabriel Boaventura Marques e Silva  | RM554874 | 2TDSB-2025](https://github.com/thejaobiell) – Desenvolvedor
-* [Léo Mota Lima | RM557851 | 2TDSB-2025](https://github.com/leomotalima) – Desenvolvedor
-* [Lucas Leal das Chagas | RM551124 | 2TDSB-2025](https://github.com/LucasLDC) – Desenvolvedor
+* [João Gabriel Boaventura Marques e Silva  | RM554874 | 2TDSB-2025](https://github.com/thejaobiell)
+* [Léo Mota Lima | RM557851 | 2TDSB-2025](https://github.com/leomotalima)
+* [Lucas Leal das Chagas | RM551124 | 2TDSB-2025](https://github.com/LucasLDC)
