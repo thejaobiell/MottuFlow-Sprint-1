@@ -21,7 +21,7 @@ Este projeto automatiza a criação de uma VM no Azure, instalação do Docker e
 
 - Azure CLI instalado e autenticado (`az login`)
 - Fazer o git clone do [repositório da API em Java](https://github.com/thejaobiell/MottuFlowJava)
-  >OBS: Em **MottuFlowJava/MottuFlow/devops** tem todos os arquivos requisítados.
+  >OBS: Em **MottuFlowJava/MottuFlow/devops** tem todos os arquivos requisitados.
 - Dois arquivos prontos:
   - `vm-deploy.sh` – cria e configura a VM
   - `instalar-dockerVM.sh` – instala Docker e reinicia a VM
@@ -48,9 +48,6 @@ Script que será executado **dentro da VM**, com as seguintes responsabilidades:
 - Instalar o Docker e suas dependências
 - Adicionar o usuário `azureuser` ao grupo `docker`
 - Reiniciar a máquina para aplicar as permissões
-
----
-Ótimo! Aqui está uma versão revisada da instrução, incluindo a dica sobre o uso do `chmod +x` caso necessário:
 
 ---
 
@@ -103,9 +100,13 @@ ssh azureuser@<IP_PÚBLICO>
 
 ---
 
-## ✅ Etapa 4 – Rodar o container da aplicação
+Claro! Aqui está a **versão atualizada da Etapa 4**, já incluindo as instruções para acesso via Postman e a observação sobre os endpoints:
 
-Dentro da VM, execute:
+---
+
+## ✅ Etapa 4 – Rodar o container e acessar a aplicação
+
+Dentro da **VM**, execute:
 
 ```bash
 docker run -p 8080:8080 thejaobiel/mottuflow:sprint1
@@ -127,13 +128,13 @@ http://<IP_PÚBLICO>:8080/h2-console
 Saved Settings: Generic H2 (Embedded)
 Settings Name: Generic H2 (Embedded)
 
-Driver Class: org.h2.Driver
-JDBC URL: jdbc:h2:mem:MottuFlow
-User Name: sa
+Driver Class: org.h2.Driver  
+JDBC URL: jdbc:h2:mem:MottuFlow  
+User Name: sa  
 Password: 
 ```
 
-### 🔍 Consultas SQL:
+### 🔍 Consultas SQL sugeridas:
 
 ```sql
 SELECT * FROM FUNCIONARIO;
@@ -145,7 +146,19 @@ SELECT * FROM STATUS;
 SELECT * FROM LOCALIDADE;
 ```
 
-> ⚠️ Obs: Por padrão, as tabelas já estarão populadas com conteúdo significativo.
+> ⚠️ **Obs:** Por padrão, as tabelas já estarão populadas com conteúdo significativo.
+
+---
+
+## 📡 Como acessar a API REST
+
+Você também pode acessar a API usando ferramentas como o **Postman** ou diretamente pelo navegador, através da URL:
+
+```
+http://<IP_PÚBLICO>:8080/api/<nome-do-endpoint>
+```
+
+> 🔎 Consulte as classes Controller no código-fonte para verificar os endpoints disponíveis (por exemplo, `/api/funcionarios`, `/api/motos`, etc.).
 
 ---
 
@@ -160,6 +173,20 @@ bash limparVM.sh
 ```
 
 ---
+
+## ❗ Possíveis erros comuns
+
+- **Permissão negada ao rodar script**  
+  ➜ Execute `chmod +x <nome-do-script>.sh` para garantir que o arquivo é executável.
+
+- **Conexão SSH recusada após reboot**  
+  ➜ Aguarde até 2 minutos e tente novamente com `ssh azureuser@<IP_PÚBLICO>`.
+
+- **Porta 8080 bloqueada?**  
+  ➜ Verifique se as regras de segurança do grupo de recursos permitem entrada na porta 8080 (TCP).
+
+---
+
 
 ## 🧑‍💻 Créditos
 
