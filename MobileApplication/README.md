@@ -6,15 +6,21 @@ Projeto desenvolvido no curso de Análise e Desenvolvimento de Sistemas, com pre
 
 Projeto para a matéria de **MOBILE APPLICATION DEVELOPMENT** desenvolvido durante a **Sprint 1**.
 
+---
+
 ## 🔗 Protótipo no Figma
 
 [Visualizar protótipo no Figma](https://www.figma.com/design/PvVbzAKpL9dI2E7Iho9Xe9/MottoFlow---SPRINT-1?node-id=0-1&t=gz6ldScA0ytk4MXl-1)
+
+---
 
 ## ✨ Funcionalidades previstas
 
 * Cadastrar motos
 * Visualizar a localização das motos em tempo real
 * Navegar por uma interface amigável
+
+---
 
 ## 🔗 Integração com a API
 
@@ -34,6 +40,8 @@ No contexto da disciplina de **IoT**, também está sendo desenvolvida uma solu�
 
 A API realiza a comunicação com o banco de dados criado na disciplina de **Database**, facilitando o envio e recebimento de informações essenciais para a infraestrutura do projeto. Ela será responsável por fornecer dados em tempo real para o app mobile, garantindo uma experiência rica e integrada.
 
+---
+
 ## 🛠️ Tecnologias
 
 * **React Native**
@@ -41,9 +49,11 @@ A API realiza a comunicação com o banco de dados criado na disciplina de **Dat
 * **Figma**
 * **MockAPI**
 
+---
+
 ## 🚀 Como rodar o projeto
 
-1. Clone este repositório:
+1. [Clone este repositório](https://github.com/FIAP-MOBILE/challenge-mottuflow):
 
    ```bash
    git clone https://github.com/FIAP-MOBILE/challenge-mottuflow.git
@@ -66,6 +76,9 @@ A API realiza a comunicação com o banco de dados criado na disciplina de **Dat
    ```bash
    npm start android
    ```
+   > OBS: É NECESSÁRIO TER INTERNET PARA COMUNICAÇÃO COM O **MOCKAPI**
+
+---
 
 ## 👥 Contribuidores
 
