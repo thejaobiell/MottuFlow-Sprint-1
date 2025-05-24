@@ -25,7 +25,8 @@ Este projeto automatiza a criação de uma VM no Azure, instalação do Docker e
 - Dois arquivos prontos:
   - `vm-deploy.sh` – cria e configura a VM
   - `instalar-dockerVM.sh` – instala Docker e reinicia a VM
-  > OBS: Ambos os arquivos devem estar na mesma pasta.
+  - `limparVM.sh` – deleta a VM após o seu uso
+  > OBS: Todos os arquivos devem estar na mesma pasta.
 
 ---
 
