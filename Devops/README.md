@@ -160,19 +160,8 @@ Turma: 2TDSB - 2025
 
 ### 👨‍🎓 Alunos
 
-* João Gabriel Boaventura Marques e Silva – RM554874
-* Leo Motta Lima – RM557851
-* Lucas Leal das Chagas – RM551124
+* [João Gabriel Boaventura Marques e Silva  | RM554874 | 2TDSB-2025](https://github.com/thejaobiell)
+* [Léo Mota Lima | RM557851 | 2TDSB-2025](https://github.com/leomotalima)
+* [Lucas Leal das Chagas | RM551124 | 2TDSB-2025](https://github.com/LucasLDC)
 
 🔗 [Repositório da API em Java no GitHub](https://github.com/thejaobiell/MottuFlowJava)
-
----
-
-> 💡 **DEVOPS TOOLS & CLOUD COMPUTING – Sprint 1 Avaliação**
->
-> * Spring Web para criação da API
-> * Spring Data JPA para acesso ao banco de dados
-> * Banco H2 (ou Oracle)
-> * CRUD completo de pelo menos 2 entidades
-> * Relacionamentos entre entidades
-> * Dockerfile, scripts Azure CLI, README com instruções
