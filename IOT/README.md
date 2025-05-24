@@ -2,7 +2,7 @@
 
 ## Link do Pitch e GitHub
 
-* 🎥 Pitch: [https://www.youtube.com/watch?v=ipaQ8kzhdf8](https://www.youtube.com/watch?v=ipaQ8kzhdf8)
+* 🎥 Pitch: [https://youtu.be/2yAo3dHCBtw](https://youtu.be/2yAo3dHCBtw)
 * 💻 GitHub: [https://github.com/thejaobiell/MottuFlow-Sprint-1/tree/main](https://github.com/thejaobiell/MottuFlow-Sprint-1/tree/main)
 
 ---
